@@ -75,7 +75,7 @@ class Client extends CI_Controller
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
-        
+        $data['title'] = 'Mise a jour';
         $data['client'] = $this->client_model->get_client($id);
         //$this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
         $this->form_validation->set_rules('nomClient', 'Nom Client', 'required');

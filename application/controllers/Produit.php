@@ -1,6 +1,6 @@
 <?php
 
-class Client extends CI_Controller
+class Produit extends CI_Controller
 {
 
     //////////////////////////////
@@ -10,7 +10,7 @@ class Client extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('client_model');
+        $this->load->model('produit_model');
         $this->load->helper('url_helper');
     }
 
@@ -22,11 +22,10 @@ class Client extends CI_Controller
     public function index()
     {
         // cest argument (ici $data) est toujours un tableau
-        $data['client'] = $this->client_model->get_client();
+        $data['produit'] = $this->produit_model->get_produit();
         $this->load->view('templates/header');
-        $this->load->view('client/index', $data);
+        $this->load->view('produit/index', $data);
         $this->load->view('templates/footer');
-        
     }
 
     //////////////////////////////
@@ -36,9 +35,9 @@ class Client extends CI_Controller
 
     public function show($id)
     {
-        $data['client'] = $this->client_model->get_client($id);
+        $data['produit'] = $this->produit_model->get_produit($id);
         $this->load->view('templates/header');
-        $this->load->view('client/show', $data);
+        $this->load->view('produit/show', $data);
         $this->load->view('templates/footer');
     }
 
@@ -51,18 +50,17 @@ class Client extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nomClient', 'NomClient', 'required');
-        $this->form_validation->set_rules('numClient', 'NumClient', 'required');
-        $this->form_validation->set_rules('emailClient', 'EmailClient', 'required');
-        $this->form_validation->set_rules('adresseClient', 'AdresseClient', 'required');
-        $this->form_validation->set_rules('telClient', 'TelClient', 'required');
+        $this->form_validation->set_rules('nomProduit', 'NomProduit', 'required');
+        $this->form_validation->set_rules('descriptProduit', 'DescriptProduit', 'required');
+        $this->form_validation->set_rules('qttProduit', 'QttProduit', 'required');
+        $this->form_validation->set_rules('prixProduit', 'PrixProduit', 'required');
 
         if ($this->form_validation->run() === false) {
             $this->load->view('templates/header');
-            $this->load->view('client/create');
+            $this->load->view('produit/create');
             $this->load->view('templates/footer');
         } else {
-            $this->client_model->set_client();
+            $this->produit_model->set_produit();
             $this->load->view('templates/success');
         }
     }
@@ -76,20 +74,20 @@ class Client extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
         
-        $data['client'] = $this->client_model->get_client($id);
+        $data['produit'] = $this->produit_model->get_produit($id);
         //$this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('nomClient', 'Nom Client', 'required');
-        $this->form_validation->set_rules('numClient', 'Num Client', 'required');
-        $this->form_validation->set_rules('emailClient', 'Email Client', 'required');
-        $this->form_validation->set_rules('adresseClient', 'Adresse Client', 'required');
-        $this->form_validation->set_rules('telClient', 'Tel Client', 'required');
+
+        $this->form_validation->set_rules('nomProduit', 'NomProduit', 'required');
+        $this->form_validation->set_rules('descriptProduit', 'DescriptProduit', 'required');
+        $this->form_validation->set_rules('qttProduit', 'QttProduit', 'required');
+        $this->form_validation->set_rules('prixProduit', 'PrixProduit', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');
-            $this->load->view('client/update', $data);
+            $this->load->view('produit/update', $data);
             $this->load->view('templates/footer');
-        }else{
-            $this->client_model->set_client($id);
+        } else {
+            $this->produit_model->set_produit($id);
             $this->load->view('templates/success');
         }
     }
@@ -100,7 +98,7 @@ class Client extends CI_Controller
 
     public function delete($id)
     {
-        $this->client_model->deleteClient($id);
+        $this->produit_model->deleteProduit($id);
         $this->load->view('templates/success');
     }
 }
