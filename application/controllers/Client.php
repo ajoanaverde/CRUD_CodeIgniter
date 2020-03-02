@@ -23,7 +23,10 @@ class Client extends CI_Controller
     {
         // cest argument (ici $data) est toujours un tableau
         $data['client'] = $this->client_model->get_client();
+        $this->load->view('templates/header');
         $this->load->view('client/index', $data);
+        $this->load->view('templates/footer');
+        
     }
 
     //////////////////////////////
@@ -33,8 +36,10 @@ class Client extends CI_Controller
 
     public function show($id)
     {
-        $data['client'] = $this->client_model->get_by_id($id);
+        $data['client'] = $this->client_model->get_client($id);
+        $this->load->view('templates/header');
         $this->load->view('client/show', $data);
+        $this->load->view('templates/footer');
     }
 
     /////////////////////////////
@@ -53,7 +58,9 @@ class Client extends CI_Controller
         $this->form_validation->set_rules('telClient', 'TelClient', 'required');
 
         if ($this->form_validation->run() === false) {
+            $this->load->view('templates/header');
             $this->load->view('client/create');
+            $this->load->view('templates/footer');
         } else {
             $this->client_model->set_client();
             $this->load->view('templates/success');
@@ -78,7 +85,9 @@ class Client extends CI_Controller
         $this->form_validation->set_rules('telClient', 'Tel Client', 'required');
 
         if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
             $this->load->view('client/update', $data);
+            $this->load->view('templates/footer');
         }else{
             $this->client_model->set_client($id);
             $this->load->view('templates/success');
