@@ -1,27 +1,23 @@
-<h1 style="text-align: center;">Clients</h1>
+<h1 style="text-align: center;">Produits</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Nom</th>
-            <th>Numero de Client</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Numero de Commande</th>
+            <th>Livré <span class="text-danger">0->non</span> <span class="text-success">1->oui</span></th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($client as $one_client) : ?>
+        <?php foreach ($commande as $one_commande) : ?>
             <tr>
-                <td><?php echo $one_client['nomClient']; ?></td>
+                <td><?php echo $one_commande['numeroCommande']; ?></td>
+                <td><?php echo $one_commande['isDelivered']; ?></td>
 
-                <td><?php echo $one_client['numClient']; ?></td>
+                <td> <a href="<?php echo site_url("/commande/show/" . $one_commande["idCommande"]) ?>">View</a></td>
 
-                <td> <a href="<?php echo site_url("/client/show/" . $one_client["idClient"]) ?>">View</a></td>
+                <td> <a class="text-warning" href="<?php echo site_url("/commande/update/" . $one_commande["idCommande"]) ?>">Edit</a></td>
 
-                <td> <a class="text-warning" href="<?php echo site_url("/client/update/" . $one_client["idClient"]) ?>">Edit</a></td>
-
-                <td> <a class="text-danger" href="<?php echo site_url("/client/delete/" . $one_client["idClient"]) ?>">Delete</a></td>
+                <td> <a class="text-danger" href="<?php echo site_url("/commande/delete/" . $one_commande["idCommande"]) ?>">Delete</a></td>
             </tr>
 
 
@@ -30,5 +26,5 @@
 </table>
 
 <div style="text-align: center">
-<a href="<?php echo site_url("/client/create/") ?>"><button type="button" class="btn btn-success">add new client</button></a>
+    <a href="<?php echo site_url("/commande/create/") ?>"><button type="button" class="btn btn-success">add new commande</button></a>
 </div>

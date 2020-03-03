@@ -1,26 +1,26 @@
-<h1 style="text-align: center">Detail Client</h1>
+<h1 style="text-align: center">Detail Commande</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Nom</th>
+            <th>Nro de Commande</th>
+            <th>Client</th>
             <th>Nro de Client</th>
-            <th>Email</th>
-            <th>Adresse</th>
-            <th>Telephone</th>
+            <th>Passé le:</th>
+            <th>Livré<br>0->non<br>1->oui</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><?php echo $client['nomClient']; ?></td>
-            <td><?php echo $client['numClient']; ?></td>
-            <td><?php echo $client['emailClient']; ?></td>
-            <td><?php echo $client['adresseClient']; ?></td>
-            <td><?php echo $client['telClient']; ?></td>
+            <td><?php echo $commande['numeroCommande']; ?></td>
+            <td><?php echo $commande['nomClient']; ?></td>
+            <td><?php echo $commande['numClient']; ?></td>
+            <td><?php echo $commande['dateCommande']; ?></td>
+            <td><?php echo $commande['isDelivered']; ?></td>
         </tr>
     </tbody>
 </table>
 <div style="text-align: center">
-<a href="<?php echo site_url("/client/update/" . $client["idClient"]) ?>"><button type="button" class="btn btn-warning">Edit</button></a>
-<a href="<?php echo site_url("/client/delete/" . $client["idClient"]) ?>"><button type="button" class="btn btn-danger">Delete</button></a>
+<a href="<?php echo site_url("/commande/update/" . $commande["idCommande"]) ?>"><button type="button" class="btn btn-warning">Edit</button></a>
+<a href="<?php echo site_url("/commande/delete/" . $commande["idCommande"]) ?>"><button type="button" class="btn btn-danger">Delete</button></a>
 </div>

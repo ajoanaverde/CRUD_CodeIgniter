@@ -34,9 +34,10 @@ class Commande extends CI_Controller
     ///        SINGLE        ///
     ///////////////////////////
 
-    public function show($id)
+    public function show($id = null)
     {
         $data['commande'] = $this->commande_model->get_commande($id);
+        
         $this->load->view('templates/header');
         $this->load->view('commande/show', $data);
         $this->load->view('templates/footer');
