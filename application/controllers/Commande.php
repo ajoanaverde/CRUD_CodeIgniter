@@ -11,6 +11,7 @@ class Commande extends CI_Controller
     {
         parent::__construct();
         $this->load->model('commande_model');
+        $this->load->model('client_model');
         $this->load->helper('url_helper');
     }
 
@@ -52,11 +53,13 @@ class Commande extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
 
+        $data['client'] = $this->client_model->get_client();
         $this->form_validation->set_rules('numeroCommande', 'numeroCommande', 'required');
+        $this->form_validation->set_rules('numClient', 'NumClient', 'required');
 
         if ($this->form_validation->run() === false) {
             $this->load->view('templates/header');
-            $this->load->view('commande/create');
+            $this->load->view('commande/create', $data);
             $this->load->view('templates/footer');
         } else {
             $this->commande_model->set_commande();

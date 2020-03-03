@@ -68,21 +68,29 @@ class Commande_model extends CI_Model
 
     //////////////////////////////
     ////        CREATE        ///
-    ///        UPDATE        ///
-    ///////////////////////////
+    ////////////////////////////
 
-    public function set_commande($id = 0)
+    public function set_commande($one_client)
     {
         $data = [
             'numeroCommande' => $this->input->post('numeroCommande'),
+            'fk_idClient' => $this->input->post($one_client['numClient']),
         ];
+        return $this->db->insert('commande', $data);
+    }
 
-        if ($id <= 0) {
-            return $this->db->insert('commande', $data);
-        } else {
-            $this->db->where('idCommande', $id);
-            return $this->db->update('commande', $data);
-        }
+    //////////////////////////////
+    ////        UPDATE        ///
+    ////////////////////////////
+
+    public function update_commande($id)
+    {
+        $data = [
+            'numeroCommande' => $this->input->post('numeroCommande'),
+            'numClient' => $this->input->post('numClient'),
+        ];
+        $this->db->where('idCommande', $id);
+        return $this->db->update('commande', $data);
     }
 
     //////////////////////////////
