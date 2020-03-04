@@ -26,13 +26,13 @@
                     <a class="nav-link" href="<?php echo site_url('') ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="<?php echo site_url('/client/index') ?>">Clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="<?php echo site_url('/produit/index') ?>">Produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="<?php echo site_url('/commande/index') ?>">Commandes</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

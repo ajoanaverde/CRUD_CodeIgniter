@@ -54,20 +54,21 @@ $route['commande/delete/(:any)'] = 'commande/delete/$1';
 $route['commande/update/(:any)'] = 'commande/update/$1';
 $route['commande/create'] = 'commande/create';
 $route['commande/show/(:any)'] = 'commande/show/$1';
+$route['commande/index'] = 'commande/index';
 
 
 $route['produit/delete/(:any)'] = 'produit/delete/$1';
 $route['produit/update/(:any)'] = 'produit/update/$1';
 $route['produit/create'] = 'produit/create';
 $route['produit/show/(:any)'] = 'produit/show/$1';
-
+$route['produit/index'] = 'produit/index';
 
 $route['client/delete/(:any)'] = 'client/delete/$1';
 $route['client/update/(:any)'] = 'client/update/$1';
 $route['client/create'] = 'client/create';
 $route['client/show/(:any)'] = 'client/show/$1';
-$route['default_controller'] = 'commande/index';
-// $route['default_controller'] = 'client/index';
-// $route['default_controller'] = 'produit/index';
+$route['client/index'] = 'client/index';
+
+$route['default_controller'] = 'welcome/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
