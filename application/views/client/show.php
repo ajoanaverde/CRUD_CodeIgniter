@@ -1,4 +1,4 @@
-<h1 style="text-align: center">Detail Client</h1>
+
 
 <table class="table">
     <thead>

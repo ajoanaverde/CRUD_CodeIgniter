@@ -13,6 +13,8 @@ class Commande extends CI_Controller
         $this->load->model('commande_model');
         $this->load->model('client_model');
         $this->load->helper('url_helper');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
     }
 
     ///////////////////////////////
@@ -22,12 +24,20 @@ class Commande extends CI_Controller
 
     public function index()
     {
+        ////////////////////////////////////////////
+        // check login
+        ////////////////////////////////////////////
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('access_denied', 'You need to login to do that');
+            redirect('user/login');
+        }
+        ////////////////////////////////////////////
         // cest argument (ici $data) est toujours un tableau
         $data['commande'] = $this->commande_model->get_commande();
-        $this->load->view('templates/header');
+        $data['title'] = 'Commandes';
+        $this->load->view('templates/header', $data);
         $this->load->view('commande/index', $data);
         $this->load->view('templates/footer');
-        
     }
 
     //////////////////////////////
@@ -38,8 +48,8 @@ class Commande extends CI_Controller
     public function show($id = null)
     {
         $data['commande'] = $this->commande_model->get_commande($id);
-        
-        $this->load->view('templates/header');
+        $data['title'] = 'Detail commande';
+        $this->load->view('templates/header', $data);
         $this->load->view('commande/show', $data);
         $this->load->view('templates/footer');
     }
@@ -50,15 +60,17 @@ class Commande extends CI_Controller
 
     public function create()
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
+        // get client (pour dire à quel client appartient la commande)
         $data['client'] = $this->client_model->get_client();
+        //form rules
         $this->form_validation->set_rules('numeroCommande', 'numeroCommande', 'required');
         $this->form_validation->set_rules('numClient', 'NumClient', 'required');
-
-        if ($this->form_validation->run() === false) {
-            $this->load->view('templates/header');
+        // form rulles
+        if ($this->form_validation->run() == false) {
+            // titre
+            $data['title'] = 'Nouvelle commande';
+            // views
+            $this->load->view('templates/header', $data);
             $this->load->view('commande/create', $data);
             $this->load->view('templates/footer');
         } else {
@@ -73,18 +85,20 @@ class Commande extends CI_Controller
 
     public function update($id)
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
+        // load la info à changer
         $data['commande'] = $this->commande_model->get_commande($id);
-        
+        // form rules
         $this->form_validation->set_rules('numeroCommande', 'numeroCommande', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header');
+        // form run
+        if ($this->form_validation->run() == FALSE) {
+            // titre
+            $data['title'] = 'Changer commande';
+            //views
+            $this->load->view('templates/header', $data);
             $this->load->view('commande/update', $data);
             $this->load->view('templates/footer');
-        }else{
+        } else {
+            //update
             $this->commande_model->set_commande($id);
             $this->load->view('templates/success');
         }
